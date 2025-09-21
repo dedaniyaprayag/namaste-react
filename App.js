@@ -64,25 +64,53 @@ const styleCard = {
     backgroundColor: "#f0f0f0",
 }
 
-const RestaurantCard = () => {
+
+
+//const RestaurantCard = ({resName, cuisine}) => {
+const RestaurantCard = (props) => {
+    const {resData} = props;
     return (
         <div className="res-card" style={styleCard}> 
-            <img className="res-logo" src="https://t4.ftcdn.net/jpg/03/54/63/85/360_F_354638576_PmpJQdWJbkEEwp4oey4H19GPOAsj4N0J.jpg"></img>
-            <p>Biryani, Kebab, Mughlai</p>
-            <p>4.2 stars</p> 
-            <h3>Meghna Foods</h3>
+            <img className="res-logo" src={resData.imgUrl}></img>
+            <p>{resData.cuisine}</p>
+            <p>{resData.rating} stars</p>
+            <h3>{resData.resName}</h3>
         </div>
     )
 }
+
+const resList = [{
+    resName: "KFC",
+    cuisine: "Fast Food",
+    rating: 4.2,
+    address: "MG Road, Bengaluru",
+    imgUrl: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/FOOD_CATALOG/IMAGES/CMS/2025/5/20/133914a4-e08a-4b66-b4fd-cc93684587e4_7f4a401f-5e31-4705-b625-8360c87bfd72.jpg"
+},
+{
+    resName: "Dominos",
+    cuisine: "Fast Food",
+    rating: 4.2,
+    address: "Kormangla Road, Bengaluru",
+    imgUrl: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/FOOD_CATALOG/IMAGES/CMS/2025/7/30/80c12d76-b7d8-4207-9e2b-b6126008aac8_1f49189f-d5c6-4470-8de6-b53d8e034ba7.png_compressed"
+},
+{
+    resName: "Meghna Foods",
+    cuisine: "Fast Food",
+    rating: 4.2,
+    address: "Jayanagar Road, Bengaluru",
+    imgUrl: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2025/9/21/39e9a28b-be1a-4764-8cfe-bb69e61448f4_102334.JPG"
+}]
 
 const BodyComponent = () => {
     return (
         <div className="body">
             <div className="search">search</div>
-            <div className="res-container">
-                <RestaurantCard />
-                <RestaurantCard />
-                <RestaurantCard />
+            <div className="res-container">                
+               {
+                resList.map((res) => {
+                    return <RestaurantCard key={res.resName} resData={res} />
+                })
+               }
             </div>
         </div>
     )
